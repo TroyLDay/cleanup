@@ -1,4 +1,4 @@
-# Cleanup v 5.2.3.1
+# Cleanup
 
 A set of browser automation macros to be used with the UI.Vision Kantu browser extension https://ui.vision/.
 
