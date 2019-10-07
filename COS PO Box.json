@@ -1,0 +1,71 @@
+{
+  "Name": "COS PO Box",
+  "CreationDate": "2019-10-7",
+  "Commands": [
+    {
+      "Command": "executeScript",
+      "Target": "return window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(1) > input').value.split(' ')[0].toUpperCase();",
+      "Value": "ADDRESS1_FIRST_WORD"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ADDRESS1_FIRST_WORD}==='PO';",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.extractPOBox(window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(1) > input'),window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(4) > input'));",
+      "Value": "POBOX"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${ADDRESS2}===''?'PO Box '+${POBOX}:${ADDRESS2}+', PO Box '+${POBOX};",
+      "Value": "ADDRESS2"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[2]/ul[1]/li[2]/input",
+      "Value": "${ADDRESS2}"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${ADDRESS1}.split(' ').length>3?${ADDRESS1}.split(' ').slice(3).join(' '):' ';",
+      "Value": "ADDRESS1"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[2]/ul[1]/li[1]/input",
+      "Value": "${ADDRESS1}"
+    },
+    {
+      "Command": "storeValue",
+      "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[2]/ul[1]/li[4]/input",
+      "Value": "ZIP"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ZIP}===${POBOX}",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${ZIP}.substring(0,5);",
+      "Value": "ZIP"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[2]/ul[1]/li[4]/input",
+      "Value": "${ZIP}"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    }
+  ]
+}

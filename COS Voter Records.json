@@ -1,0 +1,81 @@
+{
+  "Name": "COS Voter Records",
+  "CreationDate": "2019-10-7",
+  "Commands": [
+    {
+      "Command": "executeScript",
+      "Target": "window.cleanUp={   vrExists:function(s){     console.log('s:'+s);     var result = ['AK','AR','CO','CT','DE','DC','FL','LA','MI','NV','NC','OH','OK','RI','UT','WA'].includes(s);     console.log(result);     return result;   } }",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.vrExists(${STATE});",
+      "Value": "VR_EXISTS"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${VR_EXISTS}!==\"false\"",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore"
+    },
+    {
+      "Command": "comment",
+      "Target": "store // 0",
+      "Value": "VR_RESULTS"
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "title=${VR_FULLNAME} has ${VR_RESULTS} Voter Records in ${STATE_NAME}",
+      "Value": ""
+    },
+    {
+      "Command": "gotoIf_v2",
+      "Target": "${!statusOK}",
+      "Value": "VR_SUCCESS"
+    },
+    {
+      "Command": "store",
+      "Target": "false",
+      "Value": "!errorignore"
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!statusOK"
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "tab=open",
+      "Value": "https://voterrecords.com/voters/${STATE}/${FIRSTNAME}+${LASTNAME}/1"
+    },
+    {
+      "Command": "label",
+      "Target": "VR_SUCCESS",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${FIRSTNAME} ${LASTNAME}",
+      "Value": "VR_FULLNAME"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"page-content-wrapper\"]/div[1]/div[1]/p",
+      "Value": "VR_RESULTS"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${VR_RESULTS}.split(' ')[2];",
+      "Value": "VR_RESULTS"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "Name": "COS Clean Up (Play me!)",
+  "CreationDate": "2019-10-7",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "false",
+      "Value": "AUTO_SEND"
+    },
+    {
+      "Command": "open",
+      "Target": "https://dashboard.conventionofstates.com",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "ACOUNTER"
+    },
+    {
+      "Command": "store",
+      "Target": "0",
+      "Value": "PAGESIZE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.localStorage.getItem('filter_url')||'https://dashboard.conventionofstates.com/admin/people';",
+      "Value": "ANSWER"
+    },
+    {
+      "Command": "prompt",
+      "Target": "Provide a Citizen Builder People or Petitions filter url:@${ANSWER}",
+      "Value": "ANSWER"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ANSWER}!==null",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "window.localStorage.setItem('filter_url',${ANSWER});",
+      "Value": ""
+    },
+    {
+      "Command": "open",
+      "Target": "${ANSWER}",
+      "Value": ""
+    },
+    {
+      "Command": "waitForVisible",
+      "Target": "id=per_page",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number.parseInt(window.document.querySelector('#per_page').value);",
+      "Value": "PAGESIZE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.document.location.pathname.split('/')[window.document.location.pathname.split('/').length-1];",
+      "Value": "TASK_TYPE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${TASK_TYPE}[0].toUpperCase()+${TASK_TYPE}.substring(1);",
+      "Value": "TASK_TYPE"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "window.cleanUp={   getState:function(i,kind){     var s=['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS',            'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC',            'ND','OH','OK','OR','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];     return s.findIndex(function(j){return j===i})+1;   } }",
+      "Value": ""
+    },
+    {
+      "Command": "while_v2",
+      "Target": "(${ANSWER}!==null&&${ACOUNTER}<${PAGESIZE}+1)",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${TASK_TYPE}==='People'&&${ANSWER}!==null",
+      "Value": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "/html/body/main/div/ul/li[${ACOUNTER}]/div[2]/header/div/h1/a@href",
+      "Value": "PROFILE"
+    },
+    {
+      "Command": "run",
+      "Target": "COS People address",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${TASK_TYPE}==='Petitions'&&${ANSWER}!==null",
+      "Value": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"DataTables_Table_0\"]/tbody/tr[${ACOUNTER}+1]/td[9]",
+      "Value": "STATUS_DETAIL"
+    },
+    {
+      "Command": "gotoIf_v2",
+      "Target": "${STATUS_DETAIL}!=='Need review: Petition imported from NB backup DB'",
+      "Value": "PROCESS_PETITION"
+    },
+    {
+      "Command": "echo",
+      "Target": "Skipped this petition since it was previously sent. Sort by 'Signed Date' descending to organize these petitions to the bottom of the list.  There is no need to process this status.",
+      "Value": "orange"
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "SKIP_PETITION",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "PROCESS_PETITION",
+      "Value": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "//table[@id=\"DataTables_Table_0\"]/tbody/tr[${ACOUNTER}+1]/td[3]/a@href",
+      "Value": "PROFILE"
+    },
+    {
+      "Command": "storeValue",
+      "Target": "id=q_petition_status",
+      "Value": "PETITION_STATUS"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"DataTables_Table_0\"]/tbody/tr[${ACOUNTER}+1]/td[4]",
+      "Value": "STATE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.getState(${STATE});",
+      "Value": "STATE_INDEX"
+    },
+    {
+      "Command": "run",
+      "Target": "COS Petition ${PETITION_STATUS}",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "SKIP_PETITION",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ANSWER}!==null",
+      "Value": ""
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "title=${TASK_TYPE} - COS",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number.parseInt(${ACOUNTER}) + 1",
+      "Value": "ACOUNTER"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "endWhile",
+      "Target": "",
+      "Value": ""
+    }
+  ]
+}

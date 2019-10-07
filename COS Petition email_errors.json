@@ -1,0 +1,101 @@
+{
+  "Name": "COS Petition email_errors",
+  "CreationDate": "2019-10-7",
+  "Commands": [
+    {
+      "Command": "selectWindow",
+      "Target": "title=${TASK_TYPE} - COS",
+      "Value": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "//table[@id=\"DataTables_Table_0\"]/tbody/tr[${ACOUNTER}+1]/td[10]/ul/li/a@href",
+      "Value": "PETITION"
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "tab=open",
+      "Value": "https://dashboard.conventionofstates.com${PETITION}"
+    },
+    {
+      "Command": "label",
+      "Target": "RESTART",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "window.cleanUp={   profileChecked:function(addrElem,tagElem){     var addr=addrElem.textContent.split(', ');     var tagText=tagElem?tagElem.textContent:'';     var tag=false;     var zip=false;          if(tagText.indexOf('Districts Confirmed Manually')>-1){       tag=true;     }     if(addr[addr.length-1].length===10) {       zip=true;     }     if(tag||zip) {       if(tagElem){         tagElem.style.backgroundColor=tag?'green':'white';       }       addrElem.style.backgroundColor=zip?'green':'white';     }else{       if(tagElem){         tagElem.style.backgroundColor='red';       }       addrElem.style.backgroundColor='red';     }     return tag||zip;   },   setSelect:function(text,select){     var initial=select.selectedIndex;     console.log('initial',initial);     var label='';     if(text.textContent){       label=text.textContent.split('-')[1];     } else {       label=text;     }     console.log('label',label);     for (var i=0, n=select.options.length;i<n;i++) {       if (select.options[i].label===label) {         select.selectedIndex=i;         i=n;       }     }     console.log('new:',select.selectedIndex);     if(select.selectedIndex!==initial){       select.style.backgroundColor='yellow';     }   } }",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "storeEval // window.document.querySelector('#form_handler_petition_review_state_id').selectedIndex=${STATE_INDEX}-1;",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "storeEval // window.cleanUp.setSelect(window.document.querySelector('body > section > aside > div:nth-child(4) > ul > li.in-row-one > p'),window.document.querySelector('#form_handler_petition_review_upper_hous_district_id'));",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "storeEval // window.cleanUp.setSelect(window.document.querySelector('body > section > aside > div:nth-child(4) > ul > li.in-row-two > p'),window.document.querySelector('#form_handler_petition_review_lower_hous_district_id'));",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.profileChecked(window.document.querySelector('body > section > aside > div:nth-child(3) > ul > li:last-child > p'),window.document.querySelector('body > section > aside > ul'));",
+      "Value": "SENDABLE"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "!${SENDABLE}",
+      "Value": ""
+    },
+    {
+      "Command": "run",
+      "Target": "COS People address",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "window.location.reload();",
+      "Value": ""
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "RESTART",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "prompt",
+      "Target": "Click Confirm to Send email to Legislator and continue.\\nClick Cancel to stop automation.",
+      "Value": "ANSWER"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ANSWER}!==null",
+      "Value": ""
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "name=button",
+      "Value": ""
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "tab=close",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    }
+  ]
+}

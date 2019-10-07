@@ -1,0 +1,61 @@
+{
+  "Name": "COS lookup address",
+  "CreationDate": "2019-10-7",
+  "Commands": [
+    {
+      "Command": "click",
+      "Target": "link=Address Lookup",
+      "Value": ""
+    },
+    {
+      "Command": "waitForVisible",
+      "Target": "xpath=//*[@id=\"modal-template\"]/div/div/div/div[1]/div[3]/button[3]",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//*[@id=\"addr_lookup_email\"]",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//*[@id=\"addr_lookup_phone\"]",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//*[@id=\"modal-template\"]/div/div/div/div[1]/div[3]/button[2]",
+      "Value": ""
+    },
+    {
+      "Command": "waitForElementVisible",
+      "Target": "xpath=//*[@id=\"modal-template\"]/div/div/div/div[2]/div[2]/div/ul/li[1]/div[1]/p[1]",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.document.querySelector('#modal-template > div > div > div > div.results-wrap > div.results-body > div > ul > li:nth-child(2) > div:nth-child(1) > p.person-desc').textContent.split(', ').reverse()[0];",
+      "Value": "ZIP_VERIFIED"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.document.querySelector('#modal-template > div > div > div > div.results-wrap > div.results-body > div > ul > li:nth-child(2) > div:nth-child(2) > p').textContent==='Address verified';",
+      "Value": "ADDRESS_VERIFIED"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ZIP_VERIFIED}.length===10&&${ADDRESS_VERIFIED}",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//*[@id=\"modal-template\"]/div/div/div/div[2]/div[2]/div/div/button[1]",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    }
+  ]
+}

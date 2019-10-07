@@ -1,0 +1,31 @@
+{
+  "Name": "COS People Edit",
+  "CreationDate": "2019-10-7",
+  "Commands": [
+    {
+      "Command": "click",
+      "Target": "link=Edit",
+      "Value": ""
+    },
+    {
+      "Command": "prompt",
+      "Target": "Click Confirm to update the profile and continue.\\nClick Cancel to stop automation.",
+      "Value": "ANSWER"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ANSWER}!==null",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//*[@id=\"profile-edit-tab\"]/main/div[2]/div[1]/section[1]/div[1]/button",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    }
+  ]
+}

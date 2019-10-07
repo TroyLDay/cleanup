@@ -1,0 +1,41 @@
+{
+  "Name": "COS People Tags",
+  "CreationDate": "2019-10-7",
+  "Commands": [
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[1]/button",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "link=Tags@POS=2",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "id=person_tags_data_tags-selectized",
+      "Value": "${ANSWER}"
+    },
+    {
+      "Command": "prompt",
+      "Target": "Choose the best tag match, then\\nClick Confirm to update the profile with the tag and continue.\\nClick Cancel to stop automation.",
+      "Value": "ANSWER"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ANSWER}!==null",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "name=commit",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "Name": "COS CO Support Pages",
+  "CreationDate": "2019-10-7",
+  "Commands": [
+    {
+      "Command": "if_v2",
+      "Target": "(${ADDRESS1}!==''&&${ZIP}.length<10);",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore"
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "title=Information Lookup",
+      "Value": ""
+    },
+    {
+      "Command": "gotoIf_v2",
+      "Target": "${!statusOK}",
+      "Value": "SUPPORT_SUCCESS"
+    },
+    {
+      "Command": "store",
+      "Target": "false",
+      "Value": "!errorignore"
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!statusOK"
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "tab=open",
+      "Value": "https://coleg.maps.arcgis.com/apps/InformationLookup/index.html?appid=8d444a8e81ca48efb5c1489da1a0c28c"
+    },
+    {
+      "Command": "label",
+      "Target": "SUPPORT_SUCCESS",
+      "Value": "!statusOK"
+    },
+    {
+      "Command": "type",
+      "Target": "id=searchDiv_input",
+      "Value": "${ADDRESS1}, ${CITY}, ${STATE}, ${ZIP}"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    }
+  ]
+}

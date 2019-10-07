@@ -1,0 +1,96 @@
+{
+  "Name": "COS melissa_search",
+  "CreationDate": "2019-10-7",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore"
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "title=Melissa Search",
+      "Value": ""
+    },
+    {
+      "Command": "gotoIf_v2",
+      "Target": "${!statusOK}",
+      "Value": "MELISSA_SUCCESS"
+    },
+    {
+      "Command": "store",
+      "Target": "false",
+      "Value": "!errorignore"
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!statusOK"
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "tab=open",
+      "Value": "https://conventionofstates.com/melissa_search"
+    },
+    {
+      "Command": "label",
+      "Target": "MELISSA_SUCCESS",
+      "Value": "!statusOK"
+    },
+    {
+      "Command": "type",
+      "Target": "id=search_params_full",
+      "Value": "${FULLNAME}"
+    },
+    {
+      "Command": "type",
+      "Target": "id=search_params_a1",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "id=search_params_city",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "id=search_params_postal",
+      "Value": "${ZIP}"
+    },
+    {
+      "Command": "type",
+      "Target": "id=search_params_phone",
+      "Value": "${PHONE}"
+    },
+    {
+      "Command": "type",
+      "Target": "id=search_params_email",
+      "Value": "${EMAIL}"
+    },
+    {
+      "Command": "select",
+      "Target": "id=search_params_state",
+      "Value": "label=${STATE}"
+    },
+    {
+      "Command": "click",
+      "Target": "//*[@id=\"searchGroup\"]/div[3]/label/span",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "//*[@id=\"searchTypeGroup\"]/div[1]/label/span",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "id=search-submit-button",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore"
+    }
+  ]
+}
