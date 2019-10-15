@@ -1,10 +1,10 @@
 {
   "Name": "COS Voter Records",
-  "CreationDate": "2019-10-7",
+  "CreationDate": "2019-10-15",
   "Commands": [
     {
       "Command": "executeScript",
-      "Target": "window.cleanUp={   vrExists:function(s){     console.log('s:'+s);     var result = ['AK','AR','CO','CT','DE','DC','FL','LA','MI','NV','NC','OH','OK','RI','UT','WA'].includes(s);     console.log(result);     return result;   } }",
+      "Target": "window.cleanUp={   vrExists:function(s){     var result = ['AK','AR','CO','CT','DE','DC','FL','LA','MI','NV','NC','OH','OK','RI','UT','WA'].includes(s);     return result;   } }",
       "Value": ""
     },
     {

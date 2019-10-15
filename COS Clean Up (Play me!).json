@@ -1,6 +1,6 @@
 {
   "Name": "COS Clean Up (Play me!)",
-  "CreationDate": "2019-10-7",
+  "CreationDate": "2019-10-15",
   "Commands": [
     {
       "Command": "store",
@@ -74,7 +74,7 @@
     },
     {
       "Command": "executeScript",
-      "Target": "window.cleanUp={   getState:function(i,kind){     var s=['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS',            'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC',            'ND','OH','OK','OR','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];     return s.findIndex(function(j){return j===i})+1;   } }",
+      "Target": "window.cleanUp={ \tgetState:function(i,kind){ \t\tvar s=['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS',            'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC',            'ND','OH','OK','OR','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']; \t\treturn s.findIndex(function(j){return j===i})+1; \t} };",
       "Value": ""
     },
     {

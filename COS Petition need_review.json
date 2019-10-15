@@ -1,6 +1,6 @@
 {
   "Name": "COS Petition need_review",
-  "CreationDate": "2019-10-7",
+  "CreationDate": "2019-10-15",
   "Commands": [
     {
       "Command": "store",
@@ -29,13 +29,18 @@
     },
     {
       "Command": "executeScript",
-      "Target": "window.cleanUp={   profileChecked:function(addrElem,tagElem){     var addr=addrElem.textContent.split(', ');     var tagText=tagElem?tagElem.textContent:'';     var tag=false;     var zip=false;          if(tagText.indexOf('Districts Confirmed Manually')>-1){       tag=true;     }     if(addr[addr.length-1].length===10) {       zip=true;     }     if(tag||zip) {       if(tagElem){         tagElem.style.backgroundColor=tag?'green':'white';       }       addrElem.style.backgroundColor=zip?'green':'white';     }else{       if(tagElem){         tagElem.style.backgroundColor='red';       }       addrElem.style.backgroundColor='red';     }     return tag||zip;   },   setSelect:function(text,select){     var initial=select.selectedIndex;     console.log('initial',initial);     var label='';     if(text.textContent){       label=text.textContent.split('-')[1];     } else {       label=text;     }     console.log('label',label);     for (var i=0, n=select.options.length;i<n;i++) {       if (select.options[i].label===label) {         select.selectedIndex=i;         i=n;       }     }     console.log('new:',select.selectedIndex);     if(select.selectedIndex!==initial){       select.style.backgroundColor='yellow';     }   } }",
+      "Target": "window.cleanUp={ \tprofileChecked:function(addrElem,tagElem){ \t\tvar addr=addrElem.textContent.split(', '); \t\tvar tagText=tagElem?tagElem.textContent:''; \t\tvar tag=false; \t\tvar zip=false;  \t\tif(tagText.indexOf('Macro Skip')>-1){ \t\t\treturn 'Macro Skip'; \t\t}else{ \t\t\tif(tagText.indexOf('Districts Confirmed Manually')>-1){ \t\t\t  tag=true; \t\t\t} \t\t\tif(tagText.indexOf('Districts Based On 5 Digit Zip Code')>-1){ \t\t\t  tag=true; \t\t\t} \t\t\tif(addr[addr.length-1].length===10) { \t\t\t  zip=true; \t\t\t} \t\t\tif(tag||zip) { \t\t\t  if(tagElem){ \t\t\t\ttagElem.style.backgroundColor=tag?'green':'white'; \t\t\t  } \t\t\t  addrElem.style.backgroundColor=zip?'green':'white'; \t\t\t}else{ \t\t\t  if(tagElem){ \t\t\t\ttagElem.style.backgroundColor='red'; \t\t\t  } \t\t\t  addrElem.style.backgroundColor='red'; \t\t\t} \t\t\treturn tag||zip; \t\t} \t} };",
       "Value": ""
     },
     {
       "Command": "executeScript",
       "Target": "return window.cleanUp.profileChecked(window.document.querySelector('#petition > div.contact-info-wrap > ul > li:nth-child(1) > span.contact-value'),window.document.querySelector('#petition > div.tags-wrap > ul'));",
       "Value": "SENDABLE"
+    },
+    {
+      "Command": "gotoIf_v2",
+      "Target": "${SENDABLE}==='Macro Skip'",
+      "Value": "DONE"
     },
     {
       "Command": "if_v2",
@@ -48,12 +53,22 @@
       "Value": ""
     },
     {
+      "Command": "if_v2",
+      "Target": "${ANSWER}!==null",
+      "Value": ""
+    },
+    {
       "Command": "selectWindow",
       "Target": "title=Check Petitions - COS",
       "Value": ""
     },
     {
       "Command": "storeEval",
+      "Target": "window.location.reload();",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
       "Target": "window.location.reload();",
       "Value": ""
     },
@@ -83,14 +98,29 @@
       "Value": ""
     },
     {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ANSWER}!==null",
+      "Value": ""
+    },
+    {
       "Command": "executeScript",
-      "Target": "window.document.querySelector('#petition > div.tags-wrap > ul').scrollIntoView();",
+      "Target": "window.document.querySelector('#petition > div.tags-wrap > ul')?window.document.querySelector('#petition > div.tags-wrap > ul').scrollIntoView():null;",
       "Value": ""
     },
     {
       "Command": "prompt",
       "Target": "Click Confirm to Send email to Legislator and continue.\\nClick Cancel to stop automation.",
       "Value": "ANSWER"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
     },
     {
       "Command": "if_v2",
