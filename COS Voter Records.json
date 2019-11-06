@@ -14,7 +14,7 @@
     },
     {
       "Command": "if_v2",
-      "Target": "${VR_EXISTS}!==\"false\"",
+      "Target": "${VR_EXISTS}",
       "Value": ""
     },
     {
