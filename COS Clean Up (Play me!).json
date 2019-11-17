@@ -1,6 +1,6 @@
 {
   "Name": "COS Clean Up (Play me!)",
-  "CreationDate": "2019-10-15",
+  "CreationDate": "2019-11-17",
   "Commands": [
     {
       "Command": "store",
@@ -8,9 +8,14 @@
       "Value": "AUTO_SEND"
     },
     {
-      "Command": "open",
-      "Target": "https://dashboard.conventionofstates.com",
-      "Value": ""
+      "Command": "comment",
+      "Target": "store // true",
+      "Value": "USE_DEFAULT_URL"
+    },
+    {
+      "Command": "comment",
+      "Target": "store // ${!CMD_VAR2}",
+      "Value": "AUTO_UPDATE"
     },
     {
       "Command": "store",
@@ -28,6 +33,21 @@
       "Value": "ANSWER"
     },
     {
+      "Command": "comment",
+      "Target": "gotoIf_v2 // ${USE_DEFAULT_URL}===\"true\"",
+      "Value": "OPEN_URL"
+    },
+    {
+      "Command": "gotoIf_v2",
+      "Target": "${!CMD_VAR1}===\"true\"",
+      "Value": "OPEN_URL"
+    },
+    {
+      "Command": "open",
+      "Target": "https://dashboard.conventionofstates.com",
+      "Value": ""
+    },
+    {
       "Command": "prompt",
       "Target": "Provide a Citizen Builder People or Petitions filter url:@${ANSWER}",
       "Value": "ANSWER"
@@ -40,6 +60,11 @@
     {
       "Command": "executeScript",
       "Target": "window.localStorage.setItem('filter_url',${ANSWER});",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "OPEN_URL",
       "Value": ""
     },
     {
