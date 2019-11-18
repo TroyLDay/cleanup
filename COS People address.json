@@ -1,6 +1,6 @@
 {
   "Name": "COS People address",
-  "CreationDate": "2019-11-17",
+  "CreationDate": "2019-11-18",
   "Commands": [
     {
       "Command": "comment",
@@ -378,11 +378,6 @@
       "Value": "UPDATE_PROFILE"
     },
     {
-      "Command": "comment",
-      "Target": "gotoIf_v2 // ${!CMD_VAR2}==='true'",
-      "Value": "UPDATE_PROFILE"
-    },
-    {
       "Command": "if_v2",
       "Target": "(${ADDRESS1}!==''&&${ZIP}.length<10);",
       "Value": ""
@@ -391,11 +386,6 @@
       "Command": "executeScript",
       "Target": "return window.cleanUp.getState(${STATE_INDEX},'senateMap');",
       "Value": "SENATE_MAP_URL"
-    },
-    {
-      "Command": "executeScript",
-      "Target": "return window.cleanUp.getState(${STATE_INDEX},'houseMap');",
-      "Value": "HOUSE_MAP_URL"
     },
     {
       "Command": "store",
@@ -458,6 +448,16 @@
       "Value": ""
     },
     {
+      "Command": "if_v2",
+      "Target": "${STATE}!=='NE'",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.getState(${STATE_INDEX},'houseMap');",
+      "Value": "HOUSE_MAP_URL"
+    },
+    {
       "Command": "store",
       "Target": "true",
       "Value": "!errorignore"
@@ -510,6 +510,11 @@
     {
       "Command": "click",
       "Target": "//*[@id=\"searchPanel\"]/div/div/div[5]/div[3]/a",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
       "Value": ""
     },
     {
