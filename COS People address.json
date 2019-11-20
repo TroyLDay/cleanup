@@ -1,6 +1,6 @@
 {
   "Name": "COS People address",
-  "CreationDate": "2019-11-18",
+  "CreationDate": "2019-11-20",
   "Commands": [
     {
       "Command": "comment",
@@ -10,6 +10,11 @@
     {
       "Command": "comment",
       "Target": "store // true",
+      "Value": "AUTO_UPDATE"
+    },
+    {
+      "Command": "store",
+      "Target": "true",
       "Value": "AUTO_UPDATE"
     },
     {
@@ -173,8 +178,8 @@
       "Value": "DISTRICT_LOOKUP"
     },
     {
-      "Command": "storeText",
-      "Target": "xpath=//*[@id=\"modal-template\"]/div/div/div/div[2]/div[1]/div[1]/ul/li[5]/span[2]",
+      "Command": "comment",
+      "Target": "storeText // xpath=//*[@id=\"modal-template\"]/div/div/div/div[2]/div[1]/div[1]/ul/li[5]/span[2]",
       "Value": "CITY"
     },
     {
@@ -184,7 +189,7 @@
     },
     {
       "Command": "gotoIf_v2",
-      "Target": "(${CITY_RECOMMENDED}===null||${ACCEPT_CITY_RECOMMENDATION}===\"true\")",
+      "Target": "(${CITY}==='' || ${CITY_RECOMMENDED}===null||${ACCEPT_CITY_RECOMMENDATION}===\"true\")",
       "Value": "SKIP_SELECT_CITY"
     },
     {
@@ -363,6 +368,16 @@
       "Value": "ZIP"
     },
     {
+      "Command": "storeValue",
+      "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[2]/ul[2]/li[3]/div/select",
+      "Value": "UPPER_DISTRICT"
+    },
+    {
+      "Command": "storeValue",
+      "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[2]/ul[2]/li[4]/div/select",
+      "Value": "LOWER_DISTRICT"
+    },
+    {
       "Command": "executeScript",
       "Target": "window.cleanUp.geoChange(window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(2) > li.edit-user-set-wrap > div:nth-child(1)'),${LATITUDE});",
       "Value": ""
@@ -379,7 +394,7 @@
     },
     {
       "Command": "if_v2",
-      "Target": "(${ADDRESS1}!==''&&${ZIP}.length<10);",
+      "Target": "(${UPPER_DISTRICT}==='')||(${ADDRESS1}!==''&&${ZIP}.length<10);",
       "Value": ""
     },
     {
@@ -556,6 +571,26 @@
       "Command": "store",
       "Target": "true",
       "Value": "!statusOK"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "(${AUTO_UPDATE}==='true'&& ${ZIP}.length===10 && ${UPPER_DISTRICT}!=='' && ${LOWER_DISTRICT}!=='' && ${CITY}!=='' && ${ADDRESS1}!=='' && ${ADDRESS2}==='')",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "",
+      "Value": "ANSWER"
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "UPDATE_PROFILE",
+      "Value": ""
     },
     {
       "Command": "end",
