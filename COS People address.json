@@ -458,6 +458,11 @@
       "Value": ""
     },
     {
+      "Command": "if_v2",
+      "Target": "!(${ADDRESS1}.indexOf( ${CITY} )>-1 || ${ADDRESS1}.indexOf( ${ZIP} )>-1 || ${ADDRESS1}.indexOf( ${STATE} )>-1)",
+      "Value": ""
+    },
+    {
       "Command": "store",
       "Target": "",
       "Value": "ANSWER"
@@ -465,6 +470,11 @@
     {
       "Command": "gotoLabel",
       "Target": "UPDATE_PROFILE",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
       "Value": ""
     },
     {
