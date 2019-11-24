@@ -434,7 +434,7 @@
     },
     {
       "Command": "if_v2",
-      "Target": "(${UPPER_DISTRICT}==='')||(${ADDRESS1}!=='');",
+      "Target": "(${ADDRESS1}!=='' && ${UPPER_DISTRICT}!=='') || (${ADDRESS1}!=='' && ${ZIP}.length<10)",
       "Value": ""
     },
     {
