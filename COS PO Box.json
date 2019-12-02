@@ -1,6 +1,6 @@
 {
   "Name": "COS PO Box",
-  "CreationDate": "2019-10-15",
+  "CreationDate": "2019-12-2",
   "Commands": [
     {
       "Command": "executeScript",
@@ -8,8 +8,18 @@
       "Value": "ADDRESS1_FIRST_WORD"
     },
     {
+      "Command": "store",
+      "Target": "",
+      "Value": "POBOX"
+    },
+    {
       "Command": "if_v2",
       "Target": "${ADDRESS1_FIRST_WORD}==='PO';",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "window.cleanUp.extractPOBox=function(a1,z){ \tvar ad1=a1.value.split(' '); \tvar hyphen=z.length?'-':''; \tpb=''; \tif(ad1[0]==='PO'&&ad1[1]==='Box'){ \t  pb=z.value.substring(0,5)+hyphen+ad1[2].padStart(4, '0');  \t} \treturn pb; }",
       "Value": ""
     },
     {
