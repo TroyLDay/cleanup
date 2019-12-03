@@ -1,6 +1,6 @@
 {
   "Name": "COS People Tags",
-  "CreationDate": "2019-10-15",
+  "CreationDate": "2019-12-3",
   "Commands": [
     {
       "Command": "comment",
@@ -30,6 +30,11 @@
     {
       "Command": "click",
       "Target": "name=commit",
+      "Value": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "1000",
       "Value": ""
     },
     {

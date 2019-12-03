@@ -1,6 +1,6 @@
 {
   "Name": "COS People address",
-  "CreationDate": "2019-12-2",
+  "CreationDate": "2019-12-3",
   "Commands": [
     {
       "Command": "comment",
@@ -545,6 +545,11 @@
     {
       "Command": "click",
       "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[1]/button",
+      "Value": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "1000",
       "Value": ""
     },
     {
