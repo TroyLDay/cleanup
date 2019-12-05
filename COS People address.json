@@ -1,6 +1,6 @@
 {
   "Name": "COS People address",
-  "CreationDate": "2019-12-4",
+  "CreationDate": "2019-12-5",
   "Commands": [
     {
       "Command": "comment",
@@ -8,8 +8,8 @@
       "Value": "TIMEOUT"
     },
     {
-      "Command": "store",
-      "Target": "false",
+      "Command": "executeScript",
+      "Target": "return ${AUTO_UPDATE} || false",
       "Value": "AUTO_UPDATE"
     },
     {
@@ -494,7 +494,7 @@
     },
     {
       "Command": "if_v2",
-      "Target": "(${AUTO_UPDATE}==='true'&& ${ZIP}.length===10 && ${UPPER_DISTRICT}!=='' && (${LOWER_DISTRICT}!=='' || ${STATE}==='NE') && ${CITY}!=='' && ${ADDRESS1}!=='' && ${ADDRESS2}===${ADDRESS2_ORIG})",
+      "Target": "(${AUTO_UPDATE} && ${ZIP}.length===10 && ${UPPER_DISTRICT}!=='' && (${LOWER_DISTRICT}!=='' || ${STATE}==='NE') && ${CITY}!=='' && ${ADDRESS1}!=='' && ${ADDRESS2}===${ADDRESS2_ORIG})",
       "Value": ""
     },
     {

@@ -1,7 +1,12 @@
 {
   "Name": "COS Clean Up (Play me!)",
-  "CreationDate": "2019-11-17",
+  "CreationDate": "2019-12-5",
   "Commands": [
+    {
+      "Command": "run",
+      "Target": "COS Clean Up Configuration",
+      "Value": ""
+    },
     {
       "Command": "store",
       "Target": "false",

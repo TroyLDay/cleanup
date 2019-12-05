@@ -1,0 +1,11 @@
+{
+  "Name": "COS Clean Up Configuration",
+  "CreationDate": "2019-12-5",
+  "Commands": [
+    {
+      "Command": "executeScript",
+      "Target": "return false",
+      "Value": "AUTO_UPDATE"
+    }
+  ]
+}
