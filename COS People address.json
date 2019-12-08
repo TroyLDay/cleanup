@@ -1,6 +1,6 @@
 {
   "Name": "COS People address",
-  "CreationDate": "2019-12-5",
+  "CreationDate": "2019-12-8",
   "Commands": [
     {
       "Command": "comment",
@@ -11,6 +11,11 @@
       "Command": "executeScript",
       "Target": "return ${AUTO_UPDATE} || false",
       "Value": "AUTO_UPDATE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${PRE_POPULATE} || false",
+      "Value": "PRE_POPULATE"
     },
     {
       "Command": "store",
@@ -28,8 +33,8 @@
       "Value": "ALWAYS_MELISSA"
     },
     {
-      "Command": "store",
-      "Target": "false",
+      "Command": "executeScript",
+      "Target": "return ${SKIP_NAME} || false",
       "Value": "SKIP_NAME"
     },
     {
@@ -75,6 +80,21 @@
     {
       "Command": "executeScript",
       "Target": "window.cleanUp.sensitize(window.document.querySelectorAll('input.input,select.select-wrap__select'));",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${PRE_POPULATE}",
+      "Value": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "Pre-populate address fileds...",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
       "Value": ""
     },
     {
@@ -579,7 +599,7 @@
     },
     {
       "Command": "if_v2",
-      "Target": "${ANSWER}!==null&&${FIX_NAME}&&${SKIP_NAME}!=='true'",
+      "Target": "${ANSWER}!==null&&${FIX_NAME}&&!${SKIP_NAME}",
       "Value": ""
     },
     {

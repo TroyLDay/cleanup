@@ -1,0 +1,431 @@
+{
+  "Name": "COS Voter Voice",
+  "CreationDate": "2019-12-8",
+  "Commands": [
+    {
+      "Command": "run",
+      "Target": "COS Clean Up Configuration",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number(1)",
+      "Value": "ACOUNTER"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "window.cleanUp={     updateProfile:function(){         let xhr = new XMLHttpRequest();         let url = '/handlers_api/people/1117424/info';         xhr.open(\"GET\", url, true);         xhr.onload = function (e) {             console.log('onload');             if (xhr.readyState === 4) {                 console.log('readState 4');                 if (xhr.status === 200) {                     console.log(xhr.responseText);                 } else {                     console.error(xhr.statusText);                 }             }         };         xhr.onerror = function (e) {             console.error(xhr.statusText);         };         xhr.send(null);         return true;     } };",
+      "Value": ""
+    },
+    {
+      "Command": "csvRead",
+      "Target": "userchangesdev.csv",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "prompt // The Voter Voice record for ${!COL3} ${!COL4} was changed on ${!COL19}:\\n ${!COL7}\\n ${!COL8}\\n ${!COL9}\\n ${!COL10}\\n ${!COL13}\\n ${!COL6}\\n\\n  Click Confirm to open address tab and continue.\\n Click Cancel to ignore changes and continue.",
+      "Value": "ANSWER"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return cleanUp.updateProfile()",
+      "Value": "PUT_RESULT"
+    },
+    {
+      "Command": "comment",
+      "Target": "CB ID search",
+      "Value": ""
+    },
+    {
+      "Command": "open",
+      "Target": "https://dashboard.conventionofstates.com/admin/people?filter_slug=YatqLqhqK-UxUF-7U3gs",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Email search",
+      "Value": ""
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "tab=open",
+      "Value": "https://dashboard.conventionofstates.com/admin/people?filter_slug=SKNpTgHyG4SjUfMpRoZ2"
+    },
+    {
+      "Command": "comment",
+      "Target": "Name search",
+      "Value": ""
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "tab=open",
+      "Value": "https://dashboard.conventionofstates.com/admin/people?filter_slug=dE83jKqkDw_xJ-EPGVKj"
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${!csvReadStatus} == \"OK\"",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "store // ",
+      "Value": "SEARCHTYPE"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${!csvReadLineNumber}>1",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${!COL1}!=='NoID'",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "CB Id",
+      "Value": "SEARCHTYPE"
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "tab=0",
+      "Value": ""
+    },
+    {
+      "Command": "waitForVisible",
+      "Target": "id=per_page",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "id=criteria_13_1_person_category_id_value",
+      "Value": "${!COL1}"
+    },
+    {
+      "Command": "elseif",
+      "Target": "${!COL6}!==''",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "SEARCHBYEMAIL",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "email",
+      "Value": "SEARCHTYPE"
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "tab=1",
+      "Value": ""
+    },
+    {
+      "Command": "waitForVisible",
+      "Target": "id=per_page",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "id=criteria_12_1_email_category_email_value",
+      "Value": "${!COL6}"
+    },
+    {
+      "Command": "else",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "SEARCHBYNAME",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "name",
+      "Value": "SEARCHTYPE"
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "tab=2",
+      "Value": ""
+    },
+    {
+      "Command": "waitForElementVisible",
+      "Target": "id=per_page",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "id=criteria_14_1_person_category_first_name_value",
+      "Value": "${!COL3}"
+    },
+    {
+      "Command": "type",
+      "Target": "id=criteria_15_1_person_category_last_name_value",
+      "Value": "${!COL4}"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "xpath=//*[@id=\"filter-form\"]/div[2]/button[3]",
+      "Value": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=/html/body/aside[3]/div/div/div[2]/div[1]/div/span",
+      "Value": "NUM_RESULTS"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${NUM_RESULTS}==='1'",
+      "Value": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "/html/body/main/div/ul/li[${ACOUNTER}]/div[2]/header/div/h1/a@href",
+      "Value": "PROFILE"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=/html/body/main/div/ul/li/div[2]/p/span[1]",
+      "Value": "EX_ADDRESS"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${EX_ADDRESS}.split(',');",
+      "Value": "ADDR_ARRAY"
+    },
+    {
+      "Command": "comment",
+      "Target": "executeScript // return ','.repeat(4-${EX_ADDRESS}.split(',').length)+${EX_ADDRESS}",
+      "Value": "EX_ADDRESS"
+    },
+    {
+      "Command": "comment",
+      "Target": "executeScript // return ${EX_ADDRESS}.split(',')[0].trim()",
+      "Value": "EX_STREET"
+    },
+    {
+      "Command": "comment",
+      "Target": "executeScript // return ${EX_ADDRESS}.split(',')[1].trim()",
+      "Value": "EX_CITY"
+    },
+    {
+      "Command": "comment",
+      "Target": "executeScript // return ${EX_ADDRESS}.split(',')[2].trim()",
+      "Value": "EX_STATE"
+    },
+    {
+      "Command": "comment",
+      "Target": "executeScript // return ${EX_ADDRESS}.split(',')[3].trim();",
+      "Value": "EX_ZIP"
+    },
+    {
+      "Command": "comment",
+      "Target": "storeText // xpath=/html/body/main/div/ul/li/div[2]/ul[1]/li[1]",
+      "Value": "EX_EMAIL"
+    },
+    {
+      "Command": "comment",
+      "Target": "storeText // xpath=/html/body/main/div/ul/li/div[2]/ul[1]/li/span[1]",
+      "Value": "EX_PHONE_TYPE"
+    },
+    {
+      "Command": "comment",
+      "Target": "if_v2 // ${EX_PHONE_TYPE}==='home phone:'",
+      "Value": "EX_PHONE_TYPE"
+    },
+    {
+      "Command": "comment",
+      "Target": "storeText // xpath=/html/body/main/div/ul/li/div[2]/ul[1]/li/span[2]",
+      "Value": "EX_PHONE_HOME"
+    },
+    {
+      "Command": "comment",
+      "Target": "else // ",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "storeText // xpath=/html/body/main/div/ul/li/div[2]/ul[1]/li/span[2]",
+      "Value": "EX_PHONE_MOBILE"
+    },
+    {
+      "Command": "comment",
+      "Target": "end // ",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "run // COS People address",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "if_v2 // (${EX_ADDRESS}!==${!COL7}||${EX_CITY}!==${!COL8}||${EX_STATE}!==${!COL9})",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "(${EX_ADDRESS}.indexOf(${!COL7})>-1 && ${EX_ADDRESS}.indexOf(${!COL8})>-1 && ${EX_ADDRESS}.indexOf(${!COL9})>-1 && ${EX_ADDRESS}.indexOf(${!COL10})>-1)",
+      "Value": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "Found ${SEARCHTYPE} for ${!COL3} ${!COL4}, no changes detected.",
+      "Value": "green"
+    },
+    {
+      "Command": "else",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "Found ${SEARCHTYPE} for ${!COL3} ${!COL4}, update differences?",
+      "Value": "green"
+    },
+    {
+      "Command": "prompt",
+      "Target": "The Voter Voice record for ${!COL3} ${!COL4} was changed on ${!COL19}:\\n ${!COL7}\\n ${!COL8}\\n ${!COL9}\\n ${!COL10}\\n  Click Confirm to open address tab and continue.\\n Click Cancel to ignore changes and continue.",
+      "Value": "ANSWER"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ANSWER}!==null",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return true",
+      "Value": "PRE_POPULATE"
+    },
+    {
+      "Command": "run",
+      "Target": "COS People address",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "elseif",
+      "Target": "${NUM_RESULTS}==='0'",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${SEARCHTYPE}==='CB Id'",
+      "Value": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "Nothing found for ${!COL3} ${!COL4} ${SEARCHTYPE}, will search by email...",
+      "Value": "red"
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "SEARCHBYEMAIL",
+      "Value": ""
+    },
+    {
+      "Command": "elseif",
+      "Target": "${SEARCHTYPE}==='email'",
+      "Value": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "Nothing found for ${!COL3} ${!COL4} ${SEARCHTYPE}, will search by name...",
+      "Value": "red"
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "SEARCHBYNAME",
+      "Value": ""
+    },
+    {
+      "Command": "else",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "Nothing found for ${!COL3} ${!COL4}, add a profile?",
+      "Value": "red"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "else",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "More than one ${!COL3} ${!COL4}, must decide which to update.",
+      "Value": "orange"
+    },
+    {
+      "Command": "prompt",
+      "Target": "More than one possible match was found for ${!COL3} ${!COL4}.\\n  Click the NB id number of the profile that should be compared,\\n then click Confirm to open the address tab and continue.\\n or\\n Click Cancel to ignore ignore this proifle and continue.",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript_Sandbox",
+      "Target": "return Number(${!csvReadLineNumber})+1",
+      "Value": "!csvReadLineNumber"
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorIgnore"
+    },
+    {
+      "Command": "comment",
+      "Target": "echo // Reading CSV line No.  ${!csvReadLineNumber} ",
+      "Value": "!errorIgnore"
+    },
+    {
+      "Command": "csvRead",
+      "Target": "userchangesdev.csv",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "false",
+      "Value": "!errorIgnore"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    }
+  ]
+}
