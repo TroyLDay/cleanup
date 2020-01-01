@@ -1,11 +1,21 @@
 {
   "Name": "COS Clean Up Configuration",
-  "CreationDate": "2019-12-5",
+  "CreationDate": "2020-1-1",
   "Commands": [
     {
       "Command": "executeScript",
       "Target": "return false",
       "Value": "AUTO_UPDATE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return false",
+      "Value": "SKIP_NAME"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return false",
+      "Value": "USE_DISTRICT_MAPS"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "Name": "COS People address",
-  "CreationDate": "2019-12-8",
+  "CreationDate": "2020-1-1",
   "Commands": [
     {
       "Command": "comment",
@@ -14,7 +14,12 @@
     },
     {
       "Command": "executeScript",
-      "Target": "return ${PRE_POPULATE} || false",
+      "Target": "return ${USE_DISTRICT_MAPS} || false",
+      "Value": "USE_DISTRICT_MAPS"
+    },
+    {
+      "Command": "comment",
+      "Target": "executeScript // return ${PRE_POPULATE} || false",
       "Value": "PRE_POPULATE"
     },
     {
@@ -83,18 +88,18 @@
       "Value": ""
     },
     {
-      "Command": "if_v2",
-      "Target": "${PRE_POPULATE}",
+      "Command": "comment",
+      "Target": "if_v2 // ${PRE_POPULATE}",
       "Value": ""
     },
     {
-      "Command": "echo",
-      "Target": "Pre-populate address fileds...",
+      "Command": "comment",
+      "Target": "echo // Pre-populate address fileds...",
       "Value": ""
     },
     {
-      "Command": "end",
-      "Target": "",
+      "Command": "comment",
+      "Target": "end // ",
       "Value": ""
     },
     {
@@ -178,13 +183,13 @@
       "Value": "DISTRICT_LOOKUP"
     },
     {
-      "Command": "storeText",
-      "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[2]/ul[2]/li[5]/div[1]",
+      "Command": "storeValue",
+      "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[3]/div/div[2]/ul[1]/li/input",
       "Value": "LATITUDE"
     },
     {
-      "Command": "storeText",
-      "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[2]/ul[2]/li[5]/div[2]",
+      "Command": "storeValue",
+      "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[3]/div/div[2]/ul[2]/li/input",
       "Value": "LONGITUDE"
     },
     {
@@ -433,16 +438,6 @@
       "Value": "LOWER_DISTRICT"
     },
     {
-      "Command": "executeScript",
-      "Target": "window.cleanUp.geoChange(window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(2) > li.edit-user-set-wrap > div:nth-child(1)'),${LATITUDE});",
-      "Value": ""
-    },
-    {
-      "Command": "executeScript",
-      "Target": "window.cleanUp.geoChange(window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(2) > li.edit-user-set-wrap > div:nth-child(2)'),${LONGITUDE});",
-      "Value": ""
-    },
-    {
       "Command": "gotoIf_v2",
       "Target": "${!CMD_VAR2}==='true'",
       "Value": "UPDATE_PROFILE"
@@ -494,12 +489,22 @@
     },
     {
       "Command": "if_v2",
+      "Target": "${USE_DISTRICT_MAPS}",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
       "Target": "(${ADDRESS1}!=='' && ${ADDRESS1}.indexOf('@')===-1 && ${UPPER_DISTRICT}!=='') || (${ADDRESS1}!=='' && ${ADDRESS1}.indexOf('@')===-1 && ${ZIP}.length<10)",
       "Value": ""
     },
     {
       "Command": "run",
       "Target": "COS District Maps",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
       "Value": ""
     },
     {
