@@ -163,14 +163,14 @@
       "Value": "ADDRESS1"
     },
     {
-      "Command": "type",
-      "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[2]/ul[1]/li[1]/input",
-      "Value": "${ADDRESS1}"
-    },
-    {
       "Command": "executeScript",
       "Target": "return window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(2) > input').value;",
       "Value": "ADDRESS2"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[2]/ul[1]/li[1]/input",
+      "Value": "${ADDRESS1}"
     },
     {
       "Command": "type",
