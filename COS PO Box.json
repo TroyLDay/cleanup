@@ -1,11 +1,21 @@
 {
   "Name": "COS PO Box",
-  "CreationDate": "2019-12-2",
+  "CreationDate": "2020-1-1",
   "Commands": [
     {
       "Command": "executeScript",
       "Target": "return window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(1) > input').value.split(' ')[0].toUpperCase();",
       "Value": "ADDRESS1_FIRST_WORD"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(1) > input').value.split(' ')[1].toUpperCase();",
+      "Value": "ADDRESS1_SECOND_WORD"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(1) > input').value.split(' ')[2].toUpperCase();",
+      "Value": "ADDRESS1_THIRD_WORD"
     },
     {
       "Command": "store",
@@ -14,12 +24,47 @@
     },
     {
       "Command": "if_v2",
-      "Target": "${ADDRESS1_FIRST_WORD}==='PO';",
+      "Target": "${ADDRESS1_FIRST_WORD}==='P' && ${ADDRESS1_SECOND_WORD}==='O' && ${ADDRESS1_THIRD_WORD}==='BOX'",
       "Value": ""
     },
     {
       "Command": "executeScript",
-      "Target": "window.cleanUp.extractPOBox=function(a1,z){ \tvar ad1=a1.value.split(' '); \tvar hyphen=z.length?'-':''; \tpb=''; \tif(ad1[0]==='PO'&&ad1[1]==='Box'){ \t  pb=z.value.substring(0,5)+hyphen+ad1[2].padStart(4, '0');  \t} \treturn pb; }",
+      "Target": "return window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(1) > input').value.split(' ')[3].toUpperCase();",
+      "Value": "ADDRESS1_FOURTH_WORD"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return 'PO Box ' + ${ADDRESS1_FOURTH_WORD}",
+      "Value": "ADDRESS1"
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[2]/ul[1]/li[1]/input",
+      "Value": "${ADDRESS1}"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(1) > input').value.split(' ')[0].toUpperCase();",
+      "Value": "ADDRESS1_FIRST_WORD"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(1) > input').value.split(' ')[1].toUpperCase();",
+      "Value": "ADDRESS1_SECOND_WORD"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ADDRESS1_FIRST_WORD}==='PO'",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "window.cleanUp.extractPOBox=function(a1,z){     var ad1=a1.value.split(' ');     var hyphen=z.value.length?'-':'';     var pb = '';     if(ad1[0]==='PO'&&ad1[1]==='Box'){         pb=z.value.substring(0,5)+hyphen+ad1[2].padStart(4, '0');     }     return pb; };",
       "Value": ""
     },
     {
