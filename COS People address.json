@@ -1,6 +1,6 @@
 {
   "Name": "COS People address",
-  "CreationDate": "2020-1-1",
+  "CreationDate": "2020-1-8",
   "Commands": [
     {
       "Command": "comment",
@@ -324,7 +324,7 @@
     },
     {
       "Command": "executeScript",
-      "Target": "return document.querySelector('#person_address > section > aside > div.contact-info-wrap > ul > li:nth-child(2) > span.contact-value.hide-overflow')?document.querySelector('#person_address > section > aside > div.contact-info-wrap > ul > li:nth-child(2) > span.contact-value.hide-overflow').textContent:'';",
+      "Target": "return document.querySelector('#person_address > section > aside > div.contact-info-wrap > ul > li.contact-item.overflow-ellipsis > span.contact-value')?document.querySelector('#person_address > section > aside > div.contact-info-wrap > ul > li.contact-item.overflow-ellipsis > span.contact-value').textContent:'';",
       "Value": "EMAIL"
     },
     {
