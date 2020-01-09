@@ -1,6 +1,6 @@
 {
   "Name": "COS People address",
-  "CreationDate": "2020-1-8",
+  "CreationDate": "2020-1-9",
   "Commands": [
     {
       "Command": "comment",
@@ -300,11 +300,6 @@
     {
       "Command": "end",
       "Target": "",
-      "Value": ""
-    },
-    {
-      "Command": "comment",
-      "Target": "executeScript // window.cleanUp.capitalize(window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(1) > input'),true);window.cleanUp.capitalize(window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(2) > input'));window.cleanUp.capitalize(window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(3) > input'),true);",
       "Value": ""
     },
     {
