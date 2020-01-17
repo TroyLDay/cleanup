@@ -1,6 +1,6 @@
 {
   "Name": "COS People address",
-  "CreationDate": "2020-1-9",
+  "CreationDate": "2020-1-17",
   "Commands": [
     {
       "Command": "comment",
@@ -16,6 +16,11 @@
       "Command": "executeScript",
       "Target": "return ${USE_DISTRICT_MAPS} || false",
       "Value": "USE_DISTRICT_MAPS"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${ACCEPT_CITY_RECOMMENDATION} || false",
+      "Value": "ACCEPT_CITY_RECOMMENDATION"
     },
     {
       "Command": "comment",
@@ -51,11 +56,6 @@
       "Command": "store",
       "Target": "false",
       "Value": "LOOKUP_ADDRESS"
-    },
-    {
-      "Command": "store",
-      "Target": "false",
-      "Value": "ACCEPT_CITY_RECOMMENDATION"
     },
     {
       "Command": "selectWindow",
@@ -224,7 +224,7 @@
     },
     {
       "Command": "gotoIf_v2",
-      "Target": "(${CITY}==='' || ${CITY_RECOMMENDED}===null||${ACCEPT_CITY_RECOMMENDATION}===\"true\")",
+      "Target": "(${CITY}==='' || ${CITY_RECOMMENDED}===null||${ACCEPT_CITY_RECOMMENDATION})",
       "Value": "SKIP_SELECT_CITY"
     },
     {

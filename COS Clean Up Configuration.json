@@ -1,6 +1,6 @@
 {
   "Name": "COS Clean Up Configuration",
-  "CreationDate": "2020-1-1",
+  "CreationDate": "2020-1-17",
   "Commands": [
     {
       "Command": "executeScript",
@@ -16,6 +16,11 @@
       "Command": "executeScript",
       "Target": "return false",
       "Value": "USE_DISTRICT_MAPS"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return false",
+      "Value": "ACCEPT_CITY_RECOMMENDATION"
     }
   ]
 }
