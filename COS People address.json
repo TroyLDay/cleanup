@@ -1,6 +1,6 @@
 {
   "Name": "COS People address",
-  "CreationDate": "2020-1-17",
+  "CreationDate": "2020-1-18",
   "Commands": [
     {
       "Command": "comment",
@@ -493,8 +493,13 @@
       "Value": ""
     },
     {
+      "Command": "comment",
+      "Target": "run // COS District Maps",
+      "Value": ""
+    },
+    {
       "Command": "run",
-      "Target": "COS District Maps",
+      "Target": "COS OS Find Your Legislator",
       "Value": ""
     },
     {

@@ -1,0 +1,66 @@
+{
+  "Name": "COS OS Find Your Legislator",
+  "CreationDate": "2020-1-18",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore"
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "title=Find Your State Legislators - Open States",
+      "Value": ""
+    },
+    {
+      "Command": "gotoIf_v2",
+      "Target": "${!statusOK}",
+      "Value": "OS_MAP_SUCCESS"
+    },
+    {
+      "Command": "store",
+      "Target": "false",
+      "Value": "!errorignore"
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!statusOK"
+    },
+    {
+      "Command": "selectWindow",
+      "Target": "tab=open",
+      "Value": "https://openstates.org/find_your_legislator/"
+    },
+    {
+      "Command": "label",
+      "Target": "OS_MAP_SUCCESS",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // id=fyl-address",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "id=fyl-address",
+      "Value": "${ADDRESS1}, ${CITY}, ${STATE}, ${ZIP}"
+    },
+    {
+      "Command": "click",
+      "Target": "id=address-lookup",
+      "Value": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "1000",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // //*[@id=\"searchPanel\"]/div/div/div[5]/div[3]/a",
+      "Value": ""
+    }
+  ]
+}
