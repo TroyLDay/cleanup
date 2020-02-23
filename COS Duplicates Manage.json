@@ -1,0 +1,261 @@
+{
+  "Name": "COS Duplicates Manage",
+  "CreationDate": "2020-2-23",
+  "Commands": [
+    {
+      "Command": "label",
+      "Target": "TOP",
+      "Value": ""
+    },
+    {
+      "Command": "waitForElementVisible",
+      "Target": "xpath=//*[@id=\"profile\"]/div[1]/div[2]/span",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "window.cleanUp={     findElementWithText: function(elems,text) {         var ar=Array.prototype.filter.call(elems,function (el) {             return el.textContent === text;         });         if (ar.length) {             return ar[0].parentElement.children[1].textContent.replace( /[\\r\\n]+/gm, \"\" );         }else{             return '';         }     },     compareNames: function(name1,name2){         var name1Arr = name1.split(' ');         var name2Arr = name2.split(' ');         var name1Base = name1Arr.length>2?name1Arr[0]+' '+name1Arr[name1Arr.length-1]:name1;         var name2Base = name2Arr.length>2?name2Arr[0]+' '+name2Arr[name2Arr.length-1]:name2;         return window.cleanUp.compareTwoStrings(name1Base,name2Base);     },     compareTwoStrings:function(first, second, threshold) {         first = first.replace(/\\s+/g, '');         second = second.replace(/\\s+/g, '');         console.log(first);         console.log(second);         if (first==='#LNF' || second==='#LNF') return 0;         if (!first.length && !second.length) return 0;         if (!first.length || !second.length) return 0;         if (first === second) return 1;         if (first.length === 1 && second.length === 1) return 0;         if (first.length < 2 || second.length < 2) return 0;         let firstBigrams = new Map();         for (let i = 0; i < first.length - 1; i++) {             const bigram = first.substring(i, i + 2);             const count = firstBigrams.has(bigram)                 ? firstBigrams.get(bigram) + 1                 : 1;              firstBigrams.set(bigram, count);         }         let intersectionSize = 0;         for (let i = 0; i < second.length - 1; i++) {             const bigram = second.substring(i, i + 2);             const count = firstBigrams.has(bigram) ? firstBigrams.get(bigram) : 0;                 if (count > 0) {                 firstBigrams.set(bigram, count - 1);                 intersectionSize++;             }         }         return (2.0 * intersectionSize) / (first.length + second.length - 2);     } }",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return document.querySelectorAll('body > section > main > ul > li').length",
+      "Value": "NUM_MATCHES"
+    },
+    {
+      "Command": "store",
+      "Target": "${!TIMEOUT_WAIT}",
+      "Value": "LOCAL_TIMEOUT_WAIT"
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "!TIMEOUT_WAIT"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return document.querySelector('#profile > div.user-info-block > div.person-name-wrap.overflow-ellipsis-multiline > span').textContent.replace(/\\./g,'').toLowerCase();",
+      "Value": "PRIMARY_NAME"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return document.querySelector('body > section > main > ul > li > div.short-info-wrap.short-info-wrap--duplicates > header > div > h1 > a').textContent.replace(/\\./g,'').toLowerCase();",
+      "Value": "MATCH_NAME"
+    },
+    {
+      "Command": "comment",
+      "Target": "executeScript // return window.cleanUp.compareTwoStrings(${PRIMARY_NAME},${MATCH_NAME},.9)",
+      "Value": "FUZZY_NAME"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.compareNames(${PRIMARY_NAME},${MATCH_NAME},.9)",
+      "Value": "FUZZY_NAME"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return new Date(document.querySelector('#profile > div.user-info-block > p.created-label').textContent).valueOf();",
+      "Value": "PRIMARY_DATE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return new Date(document.querySelector('body > section > main > ul > li > div.avatar-container > p:nth-child(3)').textContent).valueOf();",
+      "Value": "MATCH_DATE"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"profile\"]/div[3]/ul/li[2]/span[2]",
+      "Value": "PRIMARY_EMAIL"
+    },
+    {
+      "Command": "storeText",
+      "Target": "css=body > section > main > ul > li:nth-child(1) > div.short-info-wrap.short-info-wrap--duplicates > ul.emails-wrap",
+      "Value": "MATCH_EMAIL"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.compareTwoStrings(${PRIMARY_EMAIL},${MATCH_EMAIL},.9)",
+      "Value": "FUZZY_EMAIL"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.findElementWithText(document.querySelectorAll('#profile > div.contact-info-wrap > ul > li:nth-child(3) > span.contact-label'),'Home Phone:');",
+      "Value": "PRIMARY_HOMEPHONE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.findElementWithText(document.querySelectorAll('body > section > main > ul > li > div.short-info-wrap.short-info-wrap--duplicates > ul.short-info-phones > li > span.plain-text.phone-label'),'home phone:');",
+      "Value": "MATCH_HOMEPHONE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.compareTwoStrings(${PRIMARY_HOMEPHONE},${MATCH_HOMEPHONE},.99)",
+      "Value": "FUZZY_HOMEPHONE"
+    },
+    {
+      "Command": "comment",
+      "Target": "executeScript // return Array.prototype.slice.call(document.querySelectorAll('#profile > div.contact-info-wrap > ul > li:nth-child(3) > span.contact-label'))   .filter(function (el) {     return el.textContent === 'Mobile Phone:'   })[0].parentElement.children[1].textContent",
+      "Value": "PRIMARY_MOBILEPHONE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.findElementWithText(document.querySelectorAll('#profile > div.contact-info-wrap > ul > li:nth-child(3) > span.contact-label'),'Mobile Phone:');",
+      "Value": "PRIMARY_MOBILEPHONE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.findElementWithText(document.querySelectorAll('body > section > main > ul > li > div.short-info-wrap.short-info-wrap--duplicates > ul.short-info-phones > li > span.plain-text.phone-label'),'mobile phone:');",
+      "Value": "MATCH_MOBILEPHONE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.compareTwoStrings(${PRIMARY_MOBILEPHONE},${MATCH_MOBILEPHONE},.99)",
+      "Value": "FUZZY_MOBILEPHONE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return document.querySelector('#profile > div.contact-info-wrap > ul > li:nth-child(1) > span.contact-value').textContent.replace(/\\./g,'').toLowerCase();",
+      "Value": "PRIMARY_ADDRESS"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return document.querySelector('body > section > main > ul > li > div.short-info-wrap.short-info-wrap--duplicates > p.address-wrap > span:nth-child(1)').textContent.replace(/\\./g,'').toLowerCase();",
+      "Value": "MATCH_ADDRESS"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.compareTwoStrings(${PRIMARY_ADDRESS},${MATCH_ADDRESS},.6)",
+      "Value": "FUZZY_ADDRESS"
+    },
+    {
+      "Command": "store",
+      "Target": "${LOCAL_TIMEOUT_WAIT}",
+      "Value": "!TIMEOUT_WAIT"
+    },
+    {
+      "Command": "gotoIf_v2",
+      "Target": "${FUZZY_EMAIL}>.95||${FUZZY_MOBILEPHONE}>.95",
+      "Value": "MATCHED"
+    },
+    {
+      "Command": "gotoIf_v2",
+      "Target": "(${MATCH_HOMEPHONE}!==''&&${PRIMARY_MOBILEPHONE}!=='')&&(${MATCH_HOMEPHONE}===${PRIMARY_MOBILEPHONE})",
+      "Value": "MATCHED"
+    },
+    {
+      "Command": "gotoIf_v2",
+      "Target": "(${MATCH_MOBILEPHONE}!==''&&${PRIMARY_HOMEPHONE}!=='')&&(${MATCH_MOBILEPHONE}===${PRIMARY_HOMEPHONE})",
+      "Value": "MATCHED"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${FUZZY_NAME}>.72&&(${FUZZY_EMAIL}>.83||${FUZZY_HOMEPHONE}>.99||${FUZZY_MOBILEPHONE}>.99||${FUZZY_ADDRESS}>.71||${PRIMARY_ADDRESS}.includes(${MATCH_ADDRESS})||${MATCH_ADDRESS}.includes(${PRIMARY_ADDRESS}))",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "MATCHED",
+      "Value": ""
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "xpath=/html/body/section/main/ul/li/ul/li[1]/a",
+      "Value": ""
+    },
+    {
+      "Command": "run",
+      "Target": "COS Duplicates Merge",
+      "Value": ""
+    },
+    {
+      "Command": "else",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "prompt",
+      "Target": "Mark ${MATCH_NAME} as different?\\n1. Click Confirm to mark as different person.\\n2. Or enter 'merge' and click Confirm to merge.\\n3. Or enter 'skip' and click Confirm to skip.\\n4. Or click Cancel to stop automation",
+      "Value": "ANSWER"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ANSWER}!==null",
+      "Value": ""
+    },
+    {
+      "Command": "gotoIf_v2",
+      "Target": "${ANSWER}==='merge'",
+      "Value": "MATCHED"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ANSWER}==='skip'",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${SKIPNUM} + 1",
+      "Value": "SKIPNUM"
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "linkText=Back",
+      "Value": ""
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "SKIP",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "xpath=/html/body/section/main/ul/li/ul/li[2]/a",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "pause // 1000",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ANSWER}!==null && ${NUM_MATCHES}>1",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "waitForElementVisible // xpath=/html/body/div[2]",
+      "Value": ""
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "TOP",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "SKIP",
+      "Value": ""
+    }
+  ]
+}

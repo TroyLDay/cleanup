@@ -1,6 +1,6 @@
 {
   "Name": "COS Clean Up (Play me!)",
-  "CreationDate": "2019-12-5",
+  "CreationDate": "2020-2-23",
   "Commands": [
     {
       "Command": "run",
@@ -23,8 +23,8 @@
       "Value": "AUTO_UPDATE"
     },
     {
-      "Command": "store",
-      "Target": "1",
+      "Command": "comment",
+      "Target": "executeScript // return Number.parseInt(1)",
       "Value": "ACOUNTER"
     },
     {
@@ -104,8 +104,23 @@
     },
     {
       "Command": "executeScript",
-      "Target": "window.cleanUp={ \tgetState:function(i,kind){ \t\tvar s=['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS',            'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC',            'ND','OH','OK','OR','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']; \t\treturn s.findIndex(function(j){return j===i})+1; \t} };",
+      "Target": "window.cleanUp={     getState:function(i,kind){         return [             'AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'         ].findIndex(function(j){return j===i})+1;     },     findIndex: function(elems,text,skip) {         console.log('text='+text);         return Array.prototype.findIndex.call(elems,function (el) {             console.log('skip='+skip);             var found = el.textContent.includes(text);             if (found){                 if (skip===0) {                     return true;                 }else{                     console.log('skipping');                     skip=skip-1;                     return false;                 }             } else {                 return false;             }         });     } };",
       "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "START_LOOP",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number.parseInt(0)",
+      "Value": "SKIPNUM"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number.parseInt(1)",
+      "Value": "ACOUNTER"
     },
     {
       "Command": "while_v2",
@@ -130,6 +145,91 @@
     {
       "Command": "end",
       "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${TASK_TYPE}==='Duplicates'&&${ANSWER}!==null",
+      "Value": ""
+    },
+    {
+      "Command": "waitForElementPresent",
+      "Target": "xpath=/html/body/main/div/ul/li[1]/a",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "window.cleanUp={     getState:function(i,kind){         return [             'AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'         ].findIndex(function(j){return j===i})+1;     },     findIndex: function(elems,text,skip) {         console.log('text='+text);         return Array.prototype.findIndex.call(elems,function (el) {             console.log('skip='+skip);             var found = el.textContent.includes(text);             if (found){                 if (skip===0) {                     return true;                 }else{                     console.log('skipping');                     skip=skip-1;                     return false;                 }             } else {                 return false;             }         });     } };",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return window.cleanUp.findIndex(document.querySelectorAll('body > main > div > ul > li > div.short-info-wrap.short-info-wrap--duplicates > p.address-wrap > span:nth-child(1)'),${DUPLICATES_FILTER},${SKIPNUM})",
+      "Value": "ACOUNTER"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ACOUNTER}===-1",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number.parseInt(${PAGESIZE})",
+      "Value": "ACOUNTER"
+    },
+    {
+      "Command": "comment",
+      "Target": "gotoIf_v2 // !${ADDRESS}.includes(', FL');",
+      "Value": "NEXT_DUPLICATE"
+    },
+    {
+      "Command": "else",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${ACOUNTER} + 1",
+      "Value": "ACOUNTER"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=/html/body/main/div/ul/li[${ACOUNTER}]/div[2]/p/span[1]",
+      "Value": "ADDRESS"
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "css=body > main > div > ul > li:nth-child(${ACOUNTER}) > a",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "waitForElementVisible // xpath=//*[@id=\"profile\"]/div[1]/div[2]/span",
+      "Value": ""
+    },
+    {
+      "Command": "run",
+      "Target": "COS Duplicates Manage",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "executeScript // return ${ACOUNTER} - 1",
+      "Value": "ACOUNTER"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "label // NEXT_DUPLICATE",
       "Value": ""
     },
     {
@@ -199,7 +299,7 @@
     },
     {
       "Command": "if_v2",
-      "Target": "${ANSWER}!==null",
+      "Target": "${TASK_TYPE}!=='Duplicates'&&${ANSWER}!==null",
       "Value": ""
     },
     {
@@ -208,9 +308,44 @@
       "Value": ""
     },
     {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
       "Command": "executeScript",
-      "Target": "return Number.parseInt(${ACOUNTER}) + 1",
+      "Target": "return ${ACOUNTER} + 1",
       "Value": "ACOUNTER"
+    },
+    {
+      "Command": "endWhile",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${TASK_TYPE}==='Duplicates'&&${ANSWER}!==null",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${DUPLICATES_FORWARD}",
+      "Value": ""
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "css=body > aside.page-tools > div > div > div.pagination-wrap.mr-10 > a.next-page",
+      "Value": ""
+    },
+    {
+      "Command": "else",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "css=body > aside.page-tools > div > div > div.pagination-wrap.mr-10 > a.previous-page",
+      "Value": ""
     },
     {
       "Command": "end",
@@ -218,7 +353,27 @@
       "Value": ""
     },
     {
-      "Command": "endWhile",
+      "Command": "storeValue",
+      "Target": "id=page",
+      "Value": "PAGE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "window.localStorage.setItem('filter_url',window.localStorage.getItem('filter_url').replace(/page=\\d+/,'page='+${PAGE}));",
+      "Value": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "id=page",
+      "Value": "DUPLICATES_PAGE"
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "START_LOOP",
+      "Value": ""
+    },
+    {
+      "Command": "end",
       "Target": "",
       "Value": ""
     }

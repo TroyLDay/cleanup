@@ -1,10 +1,10 @@
 {
   "Name": "COS Clean Up Configuration",
-  "CreationDate": "2020-1-18",
+  "CreationDate": "2020-2-23",
   "Commands": [
     {
       "Command": "executeScript",
-      "Target": "return true",
+      "Target": "return false",
       "Value": "AUTO_UPDATE"
     },
     {
@@ -21,6 +21,26 @@
       "Command": "executeScript",
       "Target": "return false",
       "Value": "ACCEPT_CITY_RECOMMENDATION"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return false",
+      "Value": "RECENCY_BIAS"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return 2",
+      "Value": "DUPLICATES_PAGE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return true",
+      "Value": "DUPLICATES_FORWARD"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ''",
+      "Value": "DUPLICATES_FILTER"
     }
   ]
 }
