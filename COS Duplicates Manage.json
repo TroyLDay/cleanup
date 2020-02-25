@@ -1,6 +1,6 @@
 {
   "Name": "COS Duplicates Manage",
-  "CreationDate": "2020-2-23",
+  "CreationDate": "2020-2-25",
   "Commands": [
     {
       "Command": "label",
@@ -41,11 +41,6 @@
       "Command": "executeScript",
       "Target": "return document.querySelector('body > section > main > ul > li > div.short-info-wrap.short-info-wrap--duplicates > header > div > h1 > a').textContent.replace(/\\./g,'').toLowerCase();",
       "Value": "MATCH_NAME"
-    },
-    {
-      "Command": "comment",
-      "Target": "executeScript // return window.cleanUp.compareTwoStrings(${PRIMARY_NAME},${MATCH_NAME},.9)",
-      "Value": "FUZZY_NAME"
     },
     {
       "Command": "executeScript",
@@ -91,11 +86,6 @@
       "Command": "executeScript",
       "Target": "return window.cleanUp.compareTwoStrings(${PRIMARY_HOMEPHONE},${MATCH_HOMEPHONE},.99)",
       "Value": "FUZZY_HOMEPHONE"
-    },
-    {
-      "Command": "comment",
-      "Target": "executeScript // return Array.prototype.slice.call(document.querySelectorAll('#profile > div.contact-info-wrap > ul > li:nth-child(3) > span.contact-label'))   .filter(function (el) {     return el.textContent === 'Mobile Phone:'   })[0].parentElement.children[1].textContent",
-      "Value": "PRIMARY_MOBILEPHONE"
     },
     {
       "Command": "executeScript",
@@ -173,6 +163,11 @@
       "Value": ""
     },
     {
+      "Command": "label",
+      "Target": "NOT_SURE",
+      "Value": ""
+    },
+    {
       "Command": "prompt",
       "Target": "Mark ${MATCH_NAME} as different?\\n1. Click Confirm to mark as different person.\\n2. Or enter 'merge' and click Confirm to merge.\\n3. Or enter 'skip' and click Confirm to skip.\\n4. Or click Cancel to stop automation",
       "Value": "ANSWER"
@@ -218,11 +213,6 @@
       "Value": ""
     },
     {
-      "Command": "comment",
-      "Target": "pause // 1000",
-      "Value": ""
-    },
-    {
       "Command": "end",
       "Target": "",
       "Value": ""
@@ -234,12 +224,22 @@
     },
     {
       "Command": "if_v2",
-      "Target": "${ANSWER}!==null && ${NUM_MATCHES}>1",
+      "Target": "${ANSWER}==='back'",
       "Value": ""
     },
     {
-      "Command": "comment",
-      "Target": "waitForElementVisible // xpath=/html/body/div[2]",
+      "Command": "gotoLabel",
+      "Target": "NOT_SURE",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ANSWER}!==null && ${NUM_MATCHES}>1",
       "Value": ""
     },
     {

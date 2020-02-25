@@ -1,6 +1,6 @@
 {
   "Name": "COS Duplicates Merge",
-  "CreationDate": "2020-2-23",
+  "CreationDate": "2020-2-25",
   "Commands": [
     {
       "Command": "waitForElementVisible",
@@ -48,16 +48,6 @@
       "Value": "CBID_2"
     },
     {
-      "Command": "comment",
-      "Target": "executeScript // return parseInt(${CBID_2},10)>parseInt(${CBID_1},10)?${CBID_2}:${CBID_1}",
-      "Value": "CBID_NEWER"
-    },
-    {
-      "Command": "comment",
-      "Target": "if_v2 // parseInt(${CBID_2},10)>parseInt(${CBID_1},10)",
-      "Value": ""
-    },
-    {
       "Command": "if_v2",
       "Target": "${MATCH_DATE}>${PRIMARY_DATE}",
       "Value": ""
@@ -88,14 +78,24 @@
       "Value": "!TIMEOUT_WAIT"
     },
     {
+      "Command": "label",
+      "Target": "PROMPT",
+      "Value": ""
+    },
+    {
       "Command": "prompt",
-      "Target": "Merge profiles?\\n1. Click Confirm to merge.\\n2. Or enter 'back' to go back.\\n3. Or enter any text and click Confirm to skip.\\n4. Or click Cancel to stop automation.",
+      "Target": "Merge profiles?\\n1. Click Confirm to merge.\\n2. Or enter 'back' to go back.\\n3. Or enter 'skip' and click Confirm to skip.\\n4. Or click Cancel to stop automation.",
       "Value": "ANSWER"
     },
     {
       "Command": "if_v2",
       "Target": "${ANSWER}!==null",
       "Value": ""
+    },
+    {
+      "Command": "gotoIf_v2",
+      "Target": "${ANSWER}==='skip'",
+      "Value": "SKIP"
     },
     {
       "Command": "if_v2",
@@ -108,8 +108,8 @@
       "Value": ""
     },
     {
-      "Command": "else",
-      "Target": "",
+      "Command": "elseif",
+      "Target": "${ANSWER}===''",
       "Value": ""
     },
     {
@@ -118,8 +118,28 @@
       "Value": ""
     },
     {
+      "Command": "else",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "Unsupported response: ${ANSWER}. Re-prompting...",
+      "Value": ""
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "PROMPT",
+      "Value": ""
+    },
+    {
       "Command": "end",
       "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "SKIP",
       "Value": ""
     },
     {
