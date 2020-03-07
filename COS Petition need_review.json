@@ -1,6 +1,6 @@
 {
   "Name": "COS Petition need_review",
-  "CreationDate": "2019-10-15",
+  "CreationDate": "2020-2-28",
   "Commands": [
     {
       "Command": "store",
@@ -29,7 +29,7 @@
     },
     {
       "Command": "executeScript",
-      "Target": "window.cleanUp={ \tprofileChecked:function(addrElem,tagElem){ \t\tvar addr=addrElem.textContent.split(', '); \t\tvar tagText=tagElem?tagElem.textContent:''; \t\tvar tag=false; \t\tvar zip=false;  \t\tif(tagText.indexOf('Macro Skip')>-1){ \t\t\treturn 'Macro Skip'; \t\t}else{ \t\t\tif(tagText.indexOf('Districts Confirmed Manually')>-1){ \t\t\t  tag=true; \t\t\t} \t\t\tif(tagText.indexOf('Districts Based On 5 Digit Zip Code')>-1){ \t\t\t  tag=true; \t\t\t} \t\t\tif(addr[addr.length-1].length===10) { \t\t\t  zip=true; \t\t\t} \t\t\tif(tag||zip) { \t\t\t  if(tagElem){ \t\t\t\ttagElem.style.backgroundColor=tag?'green':'white'; \t\t\t  } \t\t\t  addrElem.style.backgroundColor=zip?'green':'white'; \t\t\t}else{ \t\t\t  if(tagElem){ \t\t\t\ttagElem.style.backgroundColor='red'; \t\t\t  } \t\t\t  addrElem.style.backgroundColor='red'; \t\t\t} \t\t\treturn tag||zip; \t\t} \t} };",
+      "Target": "window.cleanUp={     profileChecked:function(addrElem,tagElem){         var addr=addrElem.textContent.split(', ');         var tagText=tagElem?tagElem.textContent:'';         var tag=false;         var zip=false;          if(tagText.indexOf('Macro Skip')>-1){             return 'Macro Skip';         }else{             if(tagText.indexOf('Districts Confirmed Manually')>-1){                 tag=true;             }             if(tagText.indexOf('Districts Based On 5 Digit Zip Code')>-1){                 tag=true;             }             if(tagText.indexOf('Districts Doubtful')>-1){                 tag=true;             }             if(addr[addr.length-1].length===10) {                 zip=true;             }             if(tag||zip) {                 if(tagElem){                     tagElem.style.backgroundColor=tag?'green':'white';                 }                 addrElem.style.backgroundColor=zip?'green':'white';             }else{                 if(tagElem){                     tagElem.style.backgroundColor='red';                 }                 addrElem.style.backgroundColor='red';             }             return tag||zip;         }     } };",
       "Value": ""
     },
     {
@@ -108,8 +108,8 @@
       "Value": ""
     },
     {
-      "Command": "executeScript",
-      "Target": "window.document.querySelector('#petition > div.tags-wrap > ul')?window.document.querySelector('#petition > div.tags-wrap > ul').scrollIntoView():null;",
+      "Command": "comment",
+      "Target": "executeScript // window.document.querySelector('#petition > div.tags-wrap > ul')?window.document.querySelector('#petition > div.tags-wrap > ul').scrollIntoView():null;",
       "Value": ""
     },
     {

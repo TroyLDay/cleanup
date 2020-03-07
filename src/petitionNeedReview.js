@@ -15,6 +15,9 @@ window.cleanUp={
             if(tagText.indexOf('Districts Based On 5 Digit Zip Code')>-1){
                 tag=true;
             }
+            if(tagText.indexOf('Districts Doubtful')>-1){
+                tag=true;
+            }
             if(addr[addr.length-1].length===10) {
                 zip=true;
             }

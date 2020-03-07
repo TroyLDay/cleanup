@@ -1,15 +1,40 @@
 {
   "Name": "COS People Tags",
-  "CreationDate": "2019-12-3",
+  "CreationDate": "2020-3-7",
   "Commands": [
     {
-      "Command": "comment",
-      "Target": "click // xpath=//*[@id=\"person_address\"]/section/main/div[2]/div[2]/div[1]/button",
+      "Command": "clickAndWait",
+      "Target": "link=Tags@POS=2",
       "Value": ""
     },
     {
-      "Command": "click",
-      "Target": "link=Tags@POS=2",
+      "Command": "executeScript",
+      "Target": "return ${AUTO_ADD_TAG} || false",
+      "Value": "AUTO_ADD_TAG"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${AUTO_ADD_TAG}",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "window.cleanUp={     addTag:function(tagValue){         var opt = document.createElement(\"option\");         opt.value = tagValue;         opt.text = 'whatever';         opt.selected = true;         var select = document.querySelector('#person_tags_data_tags');         select.add(opt,null);         select.options[select.options.length-1].selected = true;     } };",
+      "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "window.cleanUp.addTag(${TAG_VALUE});",
+      "Value": ""
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "UPDATE",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
       "Value": ""
     },
     {
@@ -28,13 +53,18 @@
       "Value": ""
     },
     {
-      "Command": "click",
+      "Command": "label",
+      "Target": "UPDATE",
+      "Value": ""
+    },
+    {
+      "Command": "clickAndWait",
       "Target": "name=commit",
       "Value": ""
     },
     {
-      "Command": "pause",
-      "Target": "1000",
+      "Command": "comment",
+      "Target": "pause // 1000",
       "Value": ""
     },
     {

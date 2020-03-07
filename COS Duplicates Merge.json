@@ -1,11 +1,16 @@
 {
   "Name": "COS Duplicates Merge",
-  "CreationDate": "2020-2-25",
+  "CreationDate": "2020-3-1",
   "Commands": [
     {
       "Command": "waitForElementVisible",
       "Target": "name=commit",
       "Value": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${AUTO_MERGE} || false",
+      "Value": "AUTO_UPDATE"
     },
     {
       "Command": "executeScript",
@@ -83,6 +88,11 @@
       "Value": ""
     },
     {
+      "Command": "gotoIf_v2",
+      "Target": "${AUTO_UPDATE}",
+      "Value": "MERGE"
+    },
+    {
       "Command": "prompt",
       "Target": "Merge profiles?\\n1. Click Confirm to merge.\\n2. Or enter 'back' to go back.\\n3. Or enter 'skip' and click Confirm to skip.\\n4. Or click Cancel to stop automation.",
       "Value": "ANSWER"
@@ -110,6 +120,11 @@
     {
       "Command": "elseif",
       "Target": "${ANSWER}===''",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "MERGE",
       "Value": ""
     },
     {

@@ -1,10 +1,5 @@
 //js lib supporting a macro by a similar file name
 window.cleanUp={
-    /*geoChange:function(el,v){
-        if(el.textContent!==v){
-            el.style.backgroundColor='yellow';
-        }
-    },*/
     sensitize:function(els){
         els.forEach(function(el){
             var iv=el.value;

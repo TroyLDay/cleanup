@@ -1,11 +1,21 @@
 {
   "Name": "COS Clean Up Configuration",
-  "CreationDate": "2020-2-23",
+  "CreationDate": "2020-3-7",
   "Commands": [
     {
       "Command": "executeScript",
       "Target": "return false",
       "Value": "AUTO_UPDATE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return false",
+      "Value": "AUTO_MERGE"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return true",
+      "Value": "AUTO_ADD_TAG"
     },
     {
       "Command": "executeScript",
@@ -34,7 +44,7 @@
     },
     {
       "Command": "executeScript",
-      "Target": "return true",
+      "Target": "return false",
       "Value": "DUPLICATES_FORWARD"
     },
     {
