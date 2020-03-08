@@ -1,6 +1,6 @@
 {
   "Name": "COS Clean Up Configuration",
-  "CreationDate": "2020-3-7",
+  "CreationDate": "2020-3-8",
   "Commands": [
     {
       "Command": "executeScript",
@@ -14,7 +14,7 @@
     },
     {
       "Command": "executeScript",
-      "Target": "return true",
+      "Target": "return false",
       "Value": "AUTO_ADD_TAG"
     },
     {

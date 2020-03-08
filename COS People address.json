@@ -1,6 +1,6 @@
 {
   "Name": "COS People address",
-  "CreationDate": "2020-3-7",
+  "CreationDate": "2020-3-8",
   "Commands": [
     {
       "Command": "comment",
@@ -554,7 +554,7 @@
     },
     {
       "Command": "prompt",
-      "Target": "Go ahead and make any improvements...\\n\\n ...then, after you've done the best you can:\\n 1. Click confirm to update and continue (some instances may add a tag);\\n 2. Or, if you have doubts about district accuracy, enter any text below and click Confirm to update, add a tag, and continue;\\n 3. Or, click Cancel to stop automation.\\n",
+      "Target": "Go ahead and make improvements...\\n\\n ...then, after you've done the best you can:\\n 1. Click confirm to update and continue;\\n 2. Or, if you have doubts about district accuracy, enter any text below then click Confirm to update and continue;\\n 3. Or, click Cancel to stop automation.\\n",
       "Value": "ANSWER"
     },
     {
@@ -588,8 +588,8 @@
       "Value": "FINISH"
     },
     {
-      "Command": "end",
-      "Target": "",
+      "Command": "comment",
+      "Target": "end // ",
       "Value": ""
     },
     {
@@ -601,6 +601,21 @@
       "Command": "executeScript",
       "Target": "return window.document.querySelector('#person_address > section > main > div.block > div:nth-child(4) > div.edit-user-set-wrap > ul:nth-child(1) > li:nth-child(1) > input').value.replace('\\'','').trim();",
       "Value": "ADDRESS1"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${ANSWER}!==''",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Add a tag",
+      "Value": ""
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${AUTO_ADD_TAG}",
+      "Value": ""
     },
     {
       "Command": "if_v2",
@@ -618,6 +633,16 @@
       "Value": "TAG_VALUE"
     },
     {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
       "Command": "run",
       "Target": "COS People Tags",
       "Value": ""
@@ -629,7 +654,7 @@
     },
     {
       "Command": "if_v2",
-      "Target": "${ANSWER}!==null&&${FIX_NAME}&&!${SKIP_NAME}",
+      "Target": "${FIX_NAME}&&!${SKIP_NAME}",
       "Value": ""
     },
     {
@@ -643,8 +668,8 @@
       "Value": ""
     },
     {
-      "Command": "if_v2",
-      "Target": "${ANSWER}!==null",
+      "Command": "comment",
+      "Target": "if_v2 // ${ANSWER}!==null",
       "Value": ""
     },
     {

@@ -1,6 +1,6 @@
 {
   "Name": "COS People Tags",
-  "CreationDate": "2020-3-7",
+  "CreationDate": "2020-3-8",
   "Commands": [
     {
       "Command": "clickAndWait",
@@ -8,8 +8,8 @@
       "Value": ""
     },
     {
-      "Command": "executeScript",
-      "Target": "return ${AUTO_ADD_TAG} || false",
+      "Command": "comment",
+      "Target": "executeScript // return ${AUTO_ADD_TAG} || false",
       "Value": "AUTO_ADD_TAG"
     },
     {
