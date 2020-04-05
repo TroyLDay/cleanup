@@ -1,6 +1,6 @@
 {
   "Name": "COS Duplicates Merge",
-  "CreationDate": "2020-3-1",
+  "CreationDate": "2020-4-5",
   "Commands": [
     {
       "Command": "waitForElementVisible",
@@ -94,7 +94,7 @@
     },
     {
       "Command": "prompt",
-      "Target": "Merge profiles?\\n1. Click Confirm to merge.\\n2. Or enter 'back' to go back.\\n3. Or enter 'skip' and click Confirm to skip.\\n4. Or click Cancel to stop automation.",
+      "Target": "Merge profiles?\\n1. Click Confirm to merge.\\n2. Or enter 'back' to go back.\\n3. Or click Cancel to stop automation.",
       "Value": "ANSWER"
     },
     {
@@ -103,8 +103,8 @@
       "Value": ""
     },
     {
-      "Command": "gotoIf_v2",
-      "Target": "${ANSWER}==='skip'",
+      "Command": "comment",
+      "Target": "gotoIf_v2 // ${ANSWER}==='skip'",
       "Value": "SKIP"
     },
     {

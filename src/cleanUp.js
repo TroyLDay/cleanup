@@ -6,10 +6,9 @@ window.cleanUp={
         ].findIndex(function(j){return j===i})+1;
     },
     findIndex: function(elems,text,skip) {
-        console.log('text='+text);
         return Array.prototype.findIndex.call(elems,function (el) {
             console.log('skip='+skip);
-            var found = el.textContent.includes(text);
+            var found = el.textContent.includes(', '+text+',');
             if (found){
                 if (skip===0) {
                     return true;
